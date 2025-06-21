@@ -158,3 +158,83 @@ When contributing, please ensure:
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Testing
+
+This project includes a comprehensive test suite using pytest.
+
+### Running Tests
+
+1. **Install development dependencies:**
+   ```bash
+   pip install -r requirements-dev.txt
+   ```
+
+2. **Run all tests:**
+   ```bash
+   pytest tests/ -v
+   ```
+
+3. **Run specific test types:**
+   ```bash
+   # Unit tests only
+   pytest tests/ -v -m "unit"
+   
+   # Integration tests only
+   pytest tests/ -v -m "integration"
+   
+   # GUI tests only
+   pytest tests/ -v -m "gui"
+   
+   # Slow tests
+   pytest tests/ -v -m "slow"
+   ```
+
+4. **Run tests with coverage:**
+   ```bash
+   pytest tests/ -v --cov=. --cov-report=html
+   ```
+
+### Using Makefile
+
+For convenience, you can use the provided Makefile:
+
+```bash
+# Set up development environment
+make dev-setup
+
+# Run all tests
+make test
+
+# Run tests with coverage
+make test-all
+
+# Run code quality checks
+make check
+
+# Format code
+make format
+
+# Clean generated files
+make clean
+```
+
+### Test Categories
+
+- **Unit Tests**: Test individual functions and methods
+- **Integration Tests**: Test complete workflows and interactions
+- **GUI Tests**: Test GUI components (may require display)
+- **Locale Tests**: Test localization consistency and functionality
+
+### Continuous Integration
+
+The project uses GitHub Actions for automated testing across multiple Python versions (3.8-3.12) and operating systems (Ubuntu, Windows, macOS).
+
+### Contributing Tests
+
+When contributing:
+
+1. Write tests for new functionality
+2. Ensure all tests pass: `make test-all`
+3. Check code quality: `make check`
+4. Update locale files if adding new UI strings

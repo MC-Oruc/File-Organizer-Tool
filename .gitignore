@@ -38,3 +38,21 @@ MANIFEST
 # Local development
 .env
 .env.local
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+coverage.xml
+*.cover
+
+# Development tools
+.bandit
+.mypy_cache/
+.pre-commit-config.yaml
+
+# Test files and directories
+test_output/
+*_tree.txt
+temp_test_dirs/
