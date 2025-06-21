@@ -62,5 +62,13 @@
     "error_cannot_delete_empty_dir": "Não é possível excluir o diretório vazio '{subdir}': {error}",
     "error_processing_subdir": "Erro ao processar o subdiretório '{subdir}': {error}",
     "error_dir_scan_reverse": "Erro ao escanear o diretório para reversão: {error}",
-    "language_label": "Idioma:"
+    "language_label": "Idioma:",
+    "export_tree_button": "Exportar Estrutura",
+    "export_tree_save_title": "Salvar Estrutura do Diretório",
+    "txt_files": "Arquivos de texto",
+    "all_files": "Todos os arquivos",
+    "status_generating_tree": "Gerando estrutura do diretório...",
+    "status_tree_exported": "Estrutura do diretório exportada com sucesso",
+    "export_tree_success": "Estrutura do diretório salva com sucesso em: {file}",
+    "error_exporting_tree": "Erro ao exportar a estrutura do diretório: {error}"
 }

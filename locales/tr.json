@@ -62,5 +62,13 @@
     "error_cannot_delete_empty_dir": "Boş dizin silinemedi '{subdir}': {error}",
     "error_processing_subdir": "Alt dizin işlenirken hata '{subdir}': {error}",
     "error_dir_scan_reverse": "Dizin geri alma için taranırken hata: {error}",
-    "language_label": "Dil:"
+    "language_label": "Dil:",
+    "export_tree_button": "Ağaç Yapısını Dışa Aktar",
+    "export_tree_save_title": "Dizin Yapısını Kaydet",
+    "txt_files": "Metin dosyaları",
+    "all_files": "Tüm dosyalar",
+    "status_generating_tree": "Dizin yapısı oluşturuluyor...",
+    "status_tree_exported": "Dizin yapısı başarıyla dışa aktarıldı",
+    "export_tree_success": "Dizin yapısı başarıyla kaydedildi: {file}",
+    "error_exporting_tree": "Dizin yapısını dışa aktarırken hata: {error}"
 }

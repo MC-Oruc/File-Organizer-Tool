@@ -14,6 +14,7 @@ A tool to organize files into subdirectories based on a prefix in their filename
 -   Option to remove the prefix from filenames upon organization.
 -   Side-by-side preview of current file structure and planned organization (in GUI mode).
 -   Undo (Reverse) organization: Moves files back from subdirectories to the parent directory.
+-   **Export Directory Tree**: Generate and save a tree-view representation of any directory structure to a text file.
 -   Multilingual interface (English, Turkish, German, Spanish, French, Italian, Portuguese, Japanese, Chinese, Russian supported out-of-the-box).
 -   Theme selection for UI customization.
 -   "Open Directory" button to quickly access the organized folder.
@@ -60,6 +61,7 @@ A tool to organize files into subdirectories based on a prefix in their filename
 5.  **Apply**: If the plan looks correct, click "Apply Organization".
 6.  **Reverse**: To undo the last organization in the selected directory, click "Reverse Organization". This will move files from the created subdirectories back to the parent directory and attempt to restore original filenames if "Remove Prefix" was used.
 7.  **Language & Theme**: Use the dropdown menus at the top to change the UI language or theme.
+8.  **Export Tree**: Click "Export Tree" to generate and save a tree-view representation of the current directory structure to a text file. This creates a visual map of all folders and files in a hierarchical format.
 
 ### Command Line Interface (CLI)
 
@@ -97,6 +99,26 @@ Reverse a previous organization:
 file-organizer /path/to/directory --reverse
 ```
 
+Export directory tree structure:
+```bash
+file-organizer /path/to/directory --export-tree
+```
+
+Export tree with custom output file:
+```bash
+file-organizer /path/to/directory --export-tree --output my_tree.txt
+```
+
+Export tree including hidden files:
+```bash
+file-organizer /path/to/directory --export-tree --show-hidden
+```
+
+Export tree with limited depth:
+```bash
+file-organizer /path/to/directory --export-tree --max-depth 3
+```
+
 #### Command Line Options
 
 ```
@@ -111,6 +133,10 @@ optional arguments:
   -v, --verbose         Show detailed information about the operations
   -y, --yes             Skip confirmation prompts
   --reverse             Reverse a previous organization, moving files back from subdirectories
+  --export-tree         Export directory tree structure to a text file
+  --output OUTPUT       Output file for directory tree export (default: [directory_name]_tree.txt)
+  --show-hidden         Include hidden files and directories in directory tree
+  --max-depth DEPTH     Maximum depth for directory tree generation (unlimited if not specified)
 ```
 
 ## Adding New Languages

@@ -16,7 +16,7 @@ if project_dir not in sys.path:
 # Moved imports here to be available for the main() function
 import tkinter as tk
 from gui_organizer import FileOrganizerApp
-from file_organizer import get_organization_plan, execute_organization, reverse_organization_action
+from file_organizer import get_organization_plan, execute_organization, reverse_organization_action, generate_directory_tree
 
 def handle_cli_mode(args):
     """
@@ -34,6 +34,21 @@ def handle_cli_mode(args):
             print(f"Error: Directory not found: {args.directory}")
             return 1
             
+        if args.export_tree:
+            # Handle directory tree export
+            output_file = args.output or f"{os.path.basename(args.directory)}_tree.txt"
+            
+            try:
+                print(f"Generating directory tree for {args.directory}...")
+                generate_directory_tree(args.directory, output_file, 
+                                       show_hidden=args.show_hidden, 
+                                       max_depth=args.max_depth)
+                print(f"Directory tree saved to: {output_file}")
+                return 0
+            except Exception as e:
+                print(f"Error generating directory tree: {e}")
+                return 1
+                
         if args.reverse:
             # Handle reverse organization
             print(f"Scanning subdirectories in {args.directory}...")
@@ -140,6 +155,10 @@ def main():
     parser.add_argument('-v', '--verbose', action='store_true', help='Show detailed information about the operations')
     parser.add_argument('-y', '--yes', action='store_true', help='Skip confirmation prompts')
     parser.add_argument('--reverse', action='store_true', help='Reverse a previous organization, moving files back from subdirectories')
+    parser.add_argument('--export-tree', action='store_true', help='Export directory tree')
+    parser.add_argument('--output', help='Output file for directory tree export')
+    parser.add_argument('--show-hidden', action='store_true', help='Include hidden files and directories in directory tree')
+    parser.add_argument('--max-depth', type=int, help='Maximum depth for directory tree generation')
     
     args = parser.parse_args()
     

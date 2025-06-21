@@ -62,5 +62,13 @@
     "error_cannot_delete_empty_dir": "空のディレクトリ '{subdir}' を削除できません: {error}",
     "error_processing_subdir": "サブディレクトリ '{subdir}' の処理エラー: {error}",
     "error_dir_scan_reverse": "元に戻すためのディレクトリ スキャン エラー: {error}",
-    "language_label": "言語:"
+    "language_label": "言語:",
+    "export_tree_button": "ツリー構造をエクスポート",
+    "export_tree_save_title": "ディレクトリ構造を保存",
+    "txt_files": "テキストファイル",
+    "all_files": "すべてのファイル",
+    "status_generating_tree": "ディレクトリ構造を生成中...",
+    "status_tree_exported": "ディレクトリ構造のエクスポートが成功しました",
+    "export_tree_success": "ディレクトリ構造が正常に保存されました: {file}",
+    "error_exporting_tree": "ディレクトリ構造のエクスポートエラー: {error}"
 }

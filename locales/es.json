@@ -62,5 +62,13 @@
     "error_cannot_delete_empty_dir": "No se puede eliminar el directorio vacío '{subdir}': {error}",
     "error_processing_subdir": "Error al procesar el subdirectorio '{subdir}': {error}",
     "error_dir_scan_reverse": "Error al escanear el directorio para la reversión: {error}",
-    "language_label": "Idioma:"
+    "language_label": "Idioma:",
+    "export_tree_button": "Exportar Estructura",
+    "export_tree_save_title": "Guardar Estructura del Directorio",
+    "txt_files": "Archivos de texto",
+    "all_files": "Todos los archivos",
+    "status_generating_tree": "Generando estructura del directorio...",
+    "status_tree_exported": "Estructura del directorio exportada exitosamente",
+    "export_tree_success": "Estructura del directorio guardada exitosamente en: {file}",
+    "error_exporting_tree": "Error al exportar la estructura del directorio: {error}"
 }

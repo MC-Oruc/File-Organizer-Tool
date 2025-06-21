@@ -62,5 +62,13 @@
     "error_cannot_delete_empty_dir": "Leeres Verzeichnis '{subdir}' kann nicht gelöscht werden: {error}",
     "error_processing_subdir": "Fehler bei der Verarbeitung des Unterverzeichnisses '{subdir}': {error}",
     "error_dir_scan_reverse": "Verzeichnisscanfehler für Rückgängigmachung: {error}",
-    "language_label": "Sprache:"
+    "language_label": "Sprache:",
+    "export_tree_button": "Struktur exportieren",
+    "export_tree_save_title": "Verzeichnisstruktur speichern",
+    "txt_files": "Textdateien",
+    "all_files": "Alle Dateien",
+    "status_generating_tree": "Generiere Verzeichnisstruktur...",
+    "status_tree_exported": "Verzeichnisstruktur erfolgreich exportiert",
+    "export_tree_success": "Verzeichnisstruktur erfolgreich gespeichert in: {file}",
+    "error_exporting_tree": "Fehler beim Exportieren der Verzeichnisstruktur: {error}"
 }

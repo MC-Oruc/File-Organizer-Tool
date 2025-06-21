@@ -7,7 +7,7 @@ Supports multiple languages and UI themes.
 """
 import tkinter as tk
 from tkinter import ttk, filedialog, messagebox
-from file_organizer import get_organization_plan, execute_organization, reverse_organization_action # Import new reverse function
+from file_organizer import get_organization_plan, execute_organization, reverse_organization_action, generate_directory_tree # Import new reverse function and tree function
 from localization import LocaleManager
 import threading
 # import shutil # No longer needed here for reverse, moved to file_organizer
@@ -141,6 +141,11 @@ class FileOrganizerApp:
                                       command=self.reverse_organization)
         self.widgets_to_translate['reverse_organization_button'].pack(side=tk.LEFT, padx=5, pady=5)
 
+        # Add Export Tree button
+        self.widgets_to_translate['export_tree_button'] = ttk.Button(execute_button_frame,
+                                      command=self.export_directory_tree)
+        self.widgets_to_translate['export_tree_button'].pack(side=tk.LEFT, padx=5, pady=5)
+
         # Add an "Open Directory" button and keep it disabled until reverse is done
         self.open_dir_button = ttk.Button(execute_button_frame, 
                                           text="Open Directory",  # or localize as needed
@@ -185,6 +190,7 @@ class FileOrganizerApp:
         self.widgets_to_translate['collapse_all_button'].config(text=lm.get_string("collapse_all_button"))
         self.widgets_to_translate['apply_organization_button'].config(text=lm.get_string("apply_organization_button"))
         self.widgets_to_translate['reverse_organization_button'].config(text=lm.get_string("reverse_organization_button"))
+        self.widgets_to_translate['export_tree_button'].config(text=lm.get_string("export_tree_button"))
         
         # Update status bar if it has a generic message or re-evaluate its current message
         # For now, we assume status messages are set dynamically with translated strings.
@@ -684,6 +690,80 @@ class FileOrganizerApp:
         else:
             messagebox.showerror(self.locale_manager.get_string("error_title"), 
                                  self.locale_manager.get_string("error_invalid_directory", directory=directory))
+
+    def export_directory_tree(self):
+        """Exports the directory tree structure to a text file."""
+        lm = self.locale_manager
+        directory = self.dir_var.get()
+        
+        if not directory:
+            messagebox.showerror(lm.get_string("error_title"), lm.get_string("error_select_directory"))
+            return
+        
+        if not os.path.isdir(directory):
+            messagebox.showerror(lm.get_string("error_title"), 
+                               lm.get_string("error_invalid_directory", directory=directory))
+            return
+        
+        # Ask user where to save the tree file
+        default_filename = f"{os.path.basename(directory)}_tree.txt"
+        output_file = filedialog.asksaveasfilename(
+            title=lm.get_string("export_tree_save_title"),
+            defaultextension=".txt",
+            initialfile=default_filename,
+            filetypes=[
+                (lm.get_string("txt_files"), "*.txt"),
+                (lm.get_string("all_files"), "*.*")
+            ]
+        )
+        
+        if not output_file:
+            return  # User cancelled
+        
+        # Show progress during export
+        self.widgets_to_translate['export_tree_button'].config(state=tk.DISABLED)
+        self.progress.pack(fill=tk.X, padx=10, pady=5)
+        self.progress.start()
+        self.status_var.set(lm.get_string("status_generating_tree"))
+        self.root.update_idletasks()
+        
+        # Run the export in a background thread
+        threading.Thread(
+            target=self._export_tree_thread,
+            args=(directory, output_file),
+            daemon=True
+        ).start()
+
+    def _export_tree_thread(self, directory, output_file):
+        """Processes tree export in a separate thread."""
+        lm = self.locale_manager
+        try:
+            generate_directory_tree(directory, output_file)
+            self.root.after(0, self._export_tree_complete, output_file)
+        except Exception as e:
+            self.root.after(0, self._export_tree_error, str(e))
+
+    def _export_tree_complete(self, output_file):
+        """Handle tree export completion in the main thread."""
+        lm = self.locale_manager
+        self.progress.stop()
+        self.progress.pack_forget()
+        self.widgets_to_translate['export_tree_button'].config(state=tk.NORMAL)
+        
+        messagebox.showinfo(lm.get_string("success_title"), 
+                          lm.get_string("export_tree_success", file=output_file))
+        self.status_var.set(lm.get_string("status_tree_exported"))
+
+    def _export_tree_error(self, error_message):
+        """Handle tree export error in the main thread."""
+        lm = self.locale_manager
+        self.progress.stop()
+        self.progress.pack_forget()
+        self.widgets_to_translate['export_tree_button'].config(state=tk.NORMAL)
+        
+        messagebox.showerror(lm.get_string("error_title"), 
+                           lm.get_string("error_exporting_tree", error=error_message))
+        self.status_var.set("")
 
 
 if __name__ == "__main__":

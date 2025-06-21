@@ -62,5 +62,13 @@
     "error_cannot_delete_empty_dir": "Не удается удалить пустой каталог '{subdir}': {error}",
     "error_processing_subdir": "Ошибка обработки подкаталога '{subdir}': {error}",
     "error_dir_scan_reverse": "Ошибка сканирования каталога для отмены: {error}",
-    "language_label": "Язык:"
+    "language_label": "Язык:",
+    "export_tree_button": "Экспорт Структуры",
+    "export_tree_save_title": "Сохранить Структуру Каталога",
+    "txt_files": "Текстовые файлы",
+    "all_files": "Все файлы",
+    "status_generating_tree": "Генерация структуры каталога...",
+    "status_tree_exported": "Структура каталога успешно экспортирована",
+    "export_tree_success": "Структура каталога успешно сохранена в: {file}",
+    "error_exporting_tree": "Ошибка при экспорте структуры каталога: {error}"
 }

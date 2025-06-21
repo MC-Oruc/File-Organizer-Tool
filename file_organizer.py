@@ -5,6 +5,7 @@ This module provides functions to:
 - Plan file organization based on filename prefixes.
 - Execute the organization by moving files into subdirectories.
 - Plan and execute the reversal of an organization.
+- Generate directory tree structure and save to text file.
 """
 import os
 import shutil
@@ -189,6 +190,86 @@ def reverse_organization_action(directory, organized_categories, remove_prefix_o
             errors.append(f"Error removing directory '{subdir_path}': {e}")
             
     return moved_count, removed_dirs_count, errors
+
+def generate_directory_tree(directory, output_file=None, show_hidden=False, max_depth=None):
+    """
+    Generates a tree-like representation of the directory structure.
+
+    Args:
+        directory (str): The path to the directory to analyze.
+        output_file (str, optional): Path to save the tree structure. If None,
+                                    returns the tree as a string. Defaults to None.
+        show_hidden (bool, optional): Whether to include hidden files/folders.
+                                     Defaults to False.
+        max_depth (int, optional): Maximum depth to traverse. None for unlimited.
+                                  Defaults to None.
+
+    Returns:
+        str: The tree structure as a string if output_file is None.
+        None: If output_file is specified, saves to file and returns None.
+
+    Raises:
+        FileNotFoundError: If the directory doesn't exist.
+        PermissionError: If there's no permission to access directory or write file.
+    """
+    if not os.path.isdir(directory):
+        raise FileNotFoundError(f"Directory not found: {directory}")
+
+    def _build_tree(path, prefix="", depth=0, is_last=True):
+        """Recursively builds the tree structure."""
+        if max_depth is not None and depth > max_depth:
+            return []
+        
+        lines = []
+        base_name = os.path.basename(path)
+        
+        if depth == 0:
+            lines.append(f"{base_name}/\n")
+        else:
+            connector = "└── " if is_last else "├── "
+            lines.append(f"{prefix}{connector}{base_name}{'/' if os.path.isdir(path) else ''}\n")
+        
+        if os.path.isdir(path):
+            try:
+                items = os.listdir(path)
+                if not show_hidden:
+                    items = [item for item in items if not item.startswith('.')]
+                
+                # Sort: directories first, then files, both alphabetically
+                dirs = [item for item in items if os.path.isdir(os.path.join(path, item))]
+                files = [item for item in items if os.path.isfile(os.path.join(path, item))]
+                sorted_items = sorted(dirs) + sorted(files)
+                
+                for i, item in enumerate(sorted_items):
+                    item_path = os.path.join(path, item)
+                    is_last_item = (i == len(sorted_items) - 1)
+                    
+                    if depth == 0:
+                        next_prefix = ""
+                    else:
+                        next_prefix = prefix + ("    " if is_last else "│   ")
+                    
+                    lines.extend(_build_tree(item_path, next_prefix, depth + 1, is_last_item))
+                    
+            except PermissionError:
+                if depth > 0:
+                    error_prefix = prefix + ("    " if is_last else "│   ")
+                    lines.append(f"{error_prefix}[Permission Denied]\n")
+        
+        return lines
+
+    tree_lines = _build_tree(directory)
+    tree_content = "".join(tree_lines)
+    
+    if output_file:
+        try:
+            with open(output_file, 'w', encoding='utf-8') as f:
+                f.write(tree_content)
+        except Exception as e:
+            raise PermissionError(f"Could not write to file {output_file}: {e}")
+        return None
+    else:
+        return tree_content
 
 if __name__ == "__main__":
     target_dir = input("Enter directory path to organize: ").strip()

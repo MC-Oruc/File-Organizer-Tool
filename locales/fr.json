@@ -62,5 +62,13 @@
     "error_cannot_delete_empty_dir": "Impossible de supprimer le répertoire vide '{subdir}' : {error}",
     "error_processing_subdir": "Erreur lors du traitement du sous-répertoire '{subdir}' : {error}",
     "error_dir_scan_reverse": "Erreur d'analyse du répertoire pour inversion : {error}",
-    "language_label": "Langue :"
+    "language_label": "Langue :",
+    "export_tree_button": "Exporter l'Arborescence",
+    "export_tree_save_title": "Enregistrer l'Arborescence du Répertoire",
+    "txt_files": "Fichiers texte",
+    "all_files": "Tous les fichiers",
+    "status_generating_tree": "Génération de l'arborescence du répertoire...",
+    "status_tree_exported": "Arborescence du répertoire exportée avec succès",
+    "export_tree_success": "Arborescence du répertoire enregistrée avec succès dans : {file}",
+    "error_exporting_tree": "Erreur lors de l'exportation de l'arborescence du répertoire : {error}"
 }

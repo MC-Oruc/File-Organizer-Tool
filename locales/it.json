@@ -62,5 +62,13 @@
     "error_cannot_delete_empty_dir": "Impossibile eliminare la directory vuota '{subdir}': {error}",
     "error_processing_subdir": "Errore durante l'elaborazione della sottodirectory '{subdir}': {error}",
     "error_dir_scan_reverse": "Errore durante la scansione della directory per l'annullamento: {error}",
-    "language_label": "Lingua:"
+    "language_label": "Lingua:",
+    "export_tree_button": "Esporta Struttura",
+    "export_tree_save_title": "Salva Struttura della Directory",
+    "txt_files": "File di testo",
+    "all_files": "Tutti i file",
+    "status_generating_tree": "Generazione struttura della directory...",
+    "status_tree_exported": "Struttura della directory esportata con successo",
+    "export_tree_success": "Struttura della directory salvata con successo in: {file}",
+    "error_exporting_tree": "Errore durante l'esportazione della struttura della directory: {error}"
 }

@@ -62,5 +62,13 @@
     "language_label": "语言:",
     "status_scanning_dirs": "正在扫描目录...",
     "error_invalid_directory": "错误：无效的目录 '{directory}'",
-    "confirm_reverse_simple": "您确定要撤销整理吗？这将把 {subdir_count} 个子目录中的 {total_files} 个文件移回主目录。"
+    "confirm_reverse_simple": "您确定要撤销整理吗？这将把 {subdir_count} 个子目录中的 {total_files} 个文件移回主目录。",
+    "export_tree_button": "导出目录树",
+    "export_tree_save_title": "保存目录结构",
+    "txt_files": "文本文件",
+    "all_files": "所有文件",
+    "status_generating_tree": "正在生成目录结构...",
+    "status_tree_exported": "目录结构导出成功",
+    "export_tree_success": "目录结构已成功保存到: {file}",
+    "error_exporting_tree": "导出目录结构时出错: {error}"
 }
